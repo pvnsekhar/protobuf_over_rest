@@ -1,9 +1,13 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, jsonify
 import mydata_pb2
 import calc_pb2
 from urllib.parse import parse_qs, urlparse
 
+from flask_swagger_ui import get_swaggerui_blueprint
+
 app = Flask(__name__)
+
+app.register_blueprint(get_swaggerui_blueprint('/swagger', '/static/calc.yaml'), url_prefix='/swagger')
 
 @app.route('/send-data', methods=['POST'])
 def send_data():
