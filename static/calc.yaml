@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: protobuf driven flask api
+  version: 1.0.0
+paths:
+  /calc-data:
+    get:
+      summary: multiplicate 2 values 
+      parameters:
+        - in: query
+          name: var1
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: var2
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Multiplied value of 2 numbers
+          content: 
+            application/x-protobuf:
+              schema:
+                $ref: '#/components/schemas/calc_response'
+components:
+  schemas:
+    calc_response:
+      type: object
+      properties:
+        result:
+          type: integer
+        success:
+          type: boolean
+          
